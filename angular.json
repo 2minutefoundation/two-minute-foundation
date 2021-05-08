@@ -49,9 +49,14 @@
             "aot": true,
             "assets": [
               "apps/two-minute-dashboard/src/favicon.ico",
-              "apps/two-minute-dashboard/src/assets"
+              "apps/two-minute-dashboard/src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/leaflet/dist/images/",
+                "output": "./assets"
+              }
             ],
-            "styles": ["apps/two-minute-dashboard/src/styles.scss"],
+            "styles": ["apps/two-minute-dashboard/src/styles.scss", "./node_modules/leaflet/dist/leaflet.css"],
             "scripts": []
           },
           "configurations": {
