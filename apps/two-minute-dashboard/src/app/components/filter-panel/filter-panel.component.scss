@@ -1,0 +1,56 @@
+.filter-panel {
+  background-color: white;
+  height: 100%;
+  width: 300px;
+
+  header {
+    width: 100%;
+    height: 50px;
+    background-color: #222;
+
+    h1 {
+      color: white;
+      font-size: 1.2rem;
+      padding-left: 15px;
+      padding-top: 13px;
+      fa-icon {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .logo-section {
+    padding: 20px;
+    text-align: center;
+
+    .logo {
+      width: 200px;
+
+    }
+  }
+
+  .filter-label {
+    width: 100%;
+  }
+
+  .filter-button {
+    width: 100%;
+    margin: 10px 0 10px 0;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+      padding: 5px;
+
+    }
+  }
+
+  ejs-datepicker {
+    width: 200px;
+  }
+
+
+}
