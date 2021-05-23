@@ -14,13 +14,7 @@
           <div>Data Sources</div>
         </ng-template>
         <ng-template #content>
-          <ul>
-            <li><ejs-checkbox label="2 Minute Stations" [checked]="true"></ejs-checkbox></li>
-            <li><ejs-checkbox label="#2minutebeachclean" ></ejs-checkbox></li>
-            <li><ejs-checkbox label="#2minutelitterpick"></ejs-checkbox></li>
-            <li><ejs-checkbox label="#2minutestreetclean"></ejs-checkbox></li>
-            <li><ejs-checkbox label="#2minutesolution"></ejs-checkbox></li>
-          </ul>
+          <div id='dataSources'><ejs-treeview #dataSources="" id='treeelement1' [fields]='field2' [showCheckBox]='showCheckBox' (nodeChecked)='nodeChecked($event)'></ejs-treeview></div>
         </ng-template>
       </e-accordionitem>
       <e-accordionitem>
@@ -28,17 +22,17 @@
           <div>Time Period</div>
         </ng-template>
         <ng-template #content>
-          <label class='filter-label'>From<br>
-            <ejs-datepicker></ejs-datepicker>
+          <label *ngIf='dashBoardData' class='filter-label'>From<br>
+            <ejs-datepicker [(value)]='dashBoardData.from'></ejs-datepicker>
           </label>
 
-          <label class='filter-label'>To<br>
-            <ejs-datepicker></ejs-datepicker>
+          <label *ngIf='dashBoardData' class='filter-label'>To<br>
+            <ejs-datepicker [(value)]='dashBoardData.to'></ejs-datepicker>
           </label>
 
-          <button class='filter-button' ejs-button>Past Week</button>
-          <button class='filter-button' ejs-button>Past Month</button>
-          <button class='filter-button' ejs-button>Past Year</button>
+          <button (click)='setWeek()' class='filter-button' ejs-button>Past Week</button>
+          <button (click)='setMonth()' class='filter-button' ejs-button>Past Month</button>
+          <button (click)='setYear()' class='filter-button' ejs-button>Past Year</button>
 
         </ng-template>
       </e-accordionitem>
@@ -62,4 +56,6 @@
       </e-accordionitem>
     </e-accordionitems>
   </ejs-accordion>
+<!--  *{{dashBoardData | json}}*-->
+
 </div>

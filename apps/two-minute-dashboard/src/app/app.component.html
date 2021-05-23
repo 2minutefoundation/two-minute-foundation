@@ -1,41 +1,6 @@
+<button (click)='loadMapData()'></button>
 <div class='dashboard'>
-<!--  <div class='map-container'>-->
-
-<!--    <div class='map-frame'>-->
-<!--      <div id='map'></div>-->
-<!--    </div>-->
-<!--  </div>-->
   <two-minute-foundation-navigation></two-minute-foundation-navigation>
-  <two-minute-foundation-map></two-minute-foundation-map>
-  <two-minute-foundation-filter-panel></two-minute-foundation-filter-panel>
-
+  <two-minute-foundation-map [dashBoardData]='dashboardData'></two-minute-foundation-map>
+  <two-minute-foundation-filter-panel [dashBoardData]='dashboardData'></two-minute-foundation-filter-panel>
 </div>
-
-
-
-
-
-<!--<div class="wrapper">-->
-<!--  <div class="box header">Header</div>-->
-<!--  <div class="box sidebar">Sidebar</div>-->
-<!--  <div class="box sidebar2">Sidebar 2</div>-->
-<!--  <div class="box content">-->
-<!--    <main class='map-container'>-->
-<!--      <div class='map-frame'>-->
-<!--        <div id='map'></div>-->
-<!--      </div>-->
-<!--    </main>-->
-<!--  <div class="box footer">Footer</div>-->
-<!--</div>-->
-
-<!--<nav>-->
-<!--  <h1>2 Minute Data Dashboard</h1>-->
-<!--</nav>-->
-<!--<aside>-->
-<!--tools-->
-<!--</aside>-->
-<!--<main class='map-container'>-->
-<!--  <div class='map-frame'>-->
-<!--    <div id='map'></div>-->
-<!--  </div>-->
-<!--</main>-->

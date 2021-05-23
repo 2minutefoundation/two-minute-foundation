@@ -1,6 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { faTools } from '@fortawesome/free-solid-svg-icons';
 import { TreeViewComponent } from '@syncfusion/ej2-angular-navigations';
+import { DataSource } from '../../models/data-source.mode';
+import { DashBoardData } from '../../models/dashboard-data.model';
+import * as moment from 'moment';
 @Component({
   selector: 'two-minute-foundation-filter-panel',
   templateUrl: './filter-panel.component.html',
@@ -10,8 +13,22 @@ export class FilterPanelComponent implements OnInit {
   faTools = faTools;
   constructor() { }
 
-  @ViewChild('treeview')
-  public tree: TreeViewComponent;
+  _dashBoardData: DashBoardData;
+  get dashBoardData(): DashBoardData {
+    return this._dashBoardData;
+  }
+  @Input() set dashBoardData(value: DashBoardData) {
+    if (value) {
+      console.log('cats', value.dataSources);
+      this._dashBoardData = value;
+      this.field2 = { dataSource: value.dataSources, id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
+    }
+  };
+
+
+  @ViewChild('treeview') public tree: TreeViewComponent;
+  @ViewChild('dataSources') public dataSources: TreeViewComponent;
+
 // defined the array of data
   public countries: Object[] = [
     { id: 1, name: 'Drinking', hasChild: true, expanded: false },
@@ -82,9 +99,15 @@ export class FilterPanelComponent implements OnInit {
 
   ];
 
+
+
+
   public data: string[] = ['All - Everywhere', 'UK Cornwall', 'UK Devon', 'United Kingdom', 'Australia', 'New Zealand'];
 // maps the appropriate column to fields property
   public field: Object = { dataSource: this.countries, id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
+
+  public field2: any; //: Object = { dataSource: this.ds, id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
+
 // set the CheckBox to the TreeView
   public showCheckBox: boolean = true;
 //set the checknodes to the TreeView
@@ -98,4 +121,18 @@ export class FilterPanelComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  setWeek() {
+    this.dashBoardData.from = moment().add(-1, 'weeks').toDate();
+    this.dashBoardData.to = moment().toDate();
+  }
+
+  setMonth() {
+    this.dashBoardData.from = moment().add(-1, 'months').toDate();
+    this.dashBoardData.to = moment().toDate();
+  }
+
+  setYear() {
+    this.dashBoardData.from = moment().add(-1, 'years').toDate();
+    this.dashBoardData.to = moment().toDate();
+  }
 }

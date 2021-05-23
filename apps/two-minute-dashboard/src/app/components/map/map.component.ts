@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
 import { MarkerService } from './../../marker.service';
 import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
+import { DashBoardData } from '../../models/dashboard-data.model';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -24,6 +25,43 @@ L.Marker.prototype.options.icon = iconDefault;
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
+
+  _dashBoardData: DashBoardData;
+  get dashBoardData(): DashBoardData {
+    return this._dashBoardData;
+  }
+  @Input() set dashBoardData(value: DashBoardData) {
+    // console.log('plot points',value.mapItems);
+
+    let LeafIcon = L.Icon.extend({
+      options: {
+        iconSize:     [38, 95],
+        shadowSize:   [50, 64],
+        iconAnchor:   [22, 94],
+        shadowAnchor: [4, 62],
+        popupAnchor:  [-3, -76]
+      }
+    });
+
+    let greenIcon = new LeafIcon({
+      iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-green.png',
+      shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png'
+    })
+
+    if (value && value.mapItems) {
+      this._dashBoardData = value;
+      this._dashBoardData.mapItems.forEach((mapItem) => {
+        // console.log('adding pin at ', [mapItem.latitude, mapItem.longitude])
+        // const marker = L.marker([mapItem.latitude, mapItem.longitude], {icon: greenIcon});
+        const marker = L.marker([mapItem.latitude, mapItem.longitude]
+        );
+
+        marker.addTo(this.map);
+      });
+    }
+
+  }
+  // @Input() dashBoardData: DashBoardData;
 
   private map;
   @ViewChild('sidebar') sidebar: SidebarComponent;
@@ -64,7 +102,8 @@ export class MapComponent implements OnInit {
 
   ngOnInit(): void {
     this.initMap();
-    this.markerService.makeCapitalMarkers(this.map);
+
+   //  this.markerService.makeCapitalMarkers(this.map);
   }
 
 }
