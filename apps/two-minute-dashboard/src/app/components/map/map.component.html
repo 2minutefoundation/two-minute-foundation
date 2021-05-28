@@ -1,5 +1,14 @@
-<div class='map'>
-  <div class='map-frame'>
-    <div id='map'></div>
-  </div>
+<!--<div class='map'>-->
+<!--  <div class='map-frame'>-->
+<!--&lt;!&ndash;    <div id='map'></div>&ndash;&gt;-->
+
+<!--    <div leaflet style="height: 300px;" [leafletOptions]="options">-->
+<!--      <div *ngFor="let m of markers" [leafletLayer]="m"></div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<div style="height: 100%"
+     leaflet
+     [leafletOptions]="options">
+  <div *ngFor="let m of markers" [leafletLayer]="m"></div>
 </div>

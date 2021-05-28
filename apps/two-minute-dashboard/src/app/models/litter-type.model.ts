@@ -1,6 +1,8 @@
 export class LitterType {
-  litterTypeId: number;
-  parentId: number;
+  id: number;
+  pid?: number;
   name: string;
-  selected: boolean;
+  isChecked?: boolean;
+  hasChild?: boolean;
+  expanded?: boolean;
 }

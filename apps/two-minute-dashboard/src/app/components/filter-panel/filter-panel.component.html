@@ -14,7 +14,7 @@
           <div>Data Sources</div>
         </ng-template>
         <ng-template #content>
-          <div id='dataSources'><ejs-treeview #dataSources="" id='treeelement1' [fields]='field2' [showCheckBox]='showCheckBox' (nodeChecked)='nodeChecked($event)'></ejs-treeview></div>
+          <div id='dataSources'><ejs-treeview #dataSources=""  [fields]='field2' [showCheckBox]='showCheckBox' (nodeChecked)='dataSourceChanged($event)'></ejs-treeview></div>
         </ng-template>
       </e-accordionitem>
       <e-accordionitem>
@@ -56,6 +56,5 @@
       </e-accordionitem>
     </e-accordionitems>
   </ejs-accordion>
-<!--  *{{dashBoardData | json}}*-->
-
+  <ng-content></ng-content>
 </div>

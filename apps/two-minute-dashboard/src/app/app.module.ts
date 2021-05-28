@@ -11,10 +11,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ButtonModule, CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
   declarations: [AppComponent, FilterPanelComponent, MapComponent, NavigationComponent],
-  imports: [BrowserModule, HttpClientModule, AccordionModule, AccordionModule, FontAwesomeModule, CheckBoxModule, DatePickerModule, ButtonModule, TreeViewModule, DropDownListModule ],
+  imports: [BrowserModule, HttpClientModule, AccordionModule, AccordionModule, FontAwesomeModule, CheckBoxModule, DatePickerModule, ButtonModule, TreeViewModule, DropDownListModule, LeafletModule ],
   providers: [MarkerService],
   bootstrap: [AppComponent],
 })

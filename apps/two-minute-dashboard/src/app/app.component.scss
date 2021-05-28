@@ -12,6 +12,11 @@ two-minute-foundation-filter-panel {
   grid-row-end: 3;
 }
 
+.update-map-button {
+  width: calc(100% - 20px);
+  margin: 10px;
+}
+
 two-minute-foundation-map {
   grid-column-start: 2;
   grid-column-end: 3;

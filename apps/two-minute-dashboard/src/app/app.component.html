@@ -1,6 +1,9 @@
-<button (click)='loadMapData()'></button>
 <div class='dashboard'>
   <two-minute-foundation-navigation></two-minute-foundation-navigation>
-  <two-minute-foundation-map [dashBoardData]='dashboardData'></two-minute-foundation-map>
-  <two-minute-foundation-filter-panel [dashBoardData]='dashboardData'></two-minute-foundation-filter-panel>
+  <two-minute-foundation-map #mapComponent [dashBoardData]='dashboardData'></two-minute-foundation-map>
+  <two-minute-foundation-filter-panel [dashBoardData]='dashboardData' >
+    <button (click)='filterUpdates()' class='update-map-button' ejs-button>Update Map</button>
+  </two-minute-foundation-filter-panel>
+
+<!-- <button ejs-button>Button</button> -->
 </div>
