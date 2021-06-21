@@ -1,7 +1,8 @@
 .dashboard {
   height: 100%;
+  width: 100%;
   display: grid;
-  grid-template-columns: max-content auto;
+  grid-template-columns: max-content auto min-content;
   grid-template-rows: max-content auto;
 }
 
@@ -29,6 +30,15 @@ two-minute-foundation-navigation {
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
+}
+
+two-minute-foundation-detail-panel {
+  two-minute-foundation-filter-panel {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 3;
+  }
 }
 
 //

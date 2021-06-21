@@ -12,10 +12,12 @@ import { ButtonModule, CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { DetailPanelComponent } from './components/detail-panel/detail-panel.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [AppComponent, FilterPanelComponent, MapComponent, NavigationComponent],
-  imports: [BrowserModule, HttpClientModule, AccordionModule, AccordionModule, FontAwesomeModule, CheckBoxModule, DatePickerModule, ButtonModule, TreeViewModule, DropDownListModule, LeafletModule ],
+  declarations: [AppComponent, FilterPanelComponent, MapComponent, NavigationComponent, DetailPanelComponent],
+  imports: [BrowserModule, HttpClientModule, AccordionModule, AccordionModule, FontAwesomeModule, CheckBoxModule, DatePickerModule, ButtonModule, TreeViewModule, DropDownListModule, LeafletModule, BrowserAnimationsModule ],
   providers: [MarkerService],
   bootstrap: [AppComponent],
 })

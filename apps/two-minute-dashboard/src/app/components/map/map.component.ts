@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
 import { MarkerService } from './../../marker.service';
 import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
@@ -29,6 +29,8 @@ L.Marker.prototype.options.icon = iconDefault;
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
+
+  @Output() pinClicked = new EventEmitter<boolean>();
 // Open Street Map definitions
   // Open Street Map definitions
   LAYER_OSM = tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -209,6 +211,10 @@ export class MapComponent implements OnInit {
         })
       }
     );
+    newMarker.on('click', () => {
+      this.pinClicked.emit()
+      // alert('clicked')
+    })
     this.markers.push(newMarker);
 
     /// marker = L.marker([mapItem.latitude, mapItem.longitude], {icon: beachCleanIcon});

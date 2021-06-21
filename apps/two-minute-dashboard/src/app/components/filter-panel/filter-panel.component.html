@@ -1,6 +1,6 @@
-<div class='filter-panel'>
+<div [@slideInOut]="isOpen" class='filter-panel'>
   <header>
-    <h1><fa-icon [icon]="faTools"></fa-icon> Configuration</h1>
+    <h1><fa-icon (click)='closeMe()' [icon]="faTimes"></fa-icon> Configuration</h1>
   </header>
 
   <section class='logo-section'>

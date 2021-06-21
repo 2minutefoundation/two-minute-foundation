@@ -1,20 +1,53 @@
-import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { faTools } from '@fortawesome/free-solid-svg-icons';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { NodeCheckEventArgs, TreeViewComponent } from '@syncfusion/ej2-angular-navigations';
 import { DataSource } from '../../models/data-source.mode';
 import { DashBoardData } from '../../models/dashboard-data.model';
 import * as moment from 'moment';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
-class EventEmitter<T> {
-}
+const OPEN = 'OPEN';
+const CLOSED = 'CLOSED';
 
 @Component({
   selector: 'two-minute-foundation-filter-panel',
   templateUrl: './filter-panel.component.html',
-  styleUrls: ['./filter-panel.component.scss']
+  styleUrls: ['./filter-panel.component.scss'],
+  animations: [
+    trigger('slideInOut', [
+      state(OPEN, style({
+        overflow: 'hidden',
+        width: '300px'
+      })),
+      state(CLOSED, style({
+        opacity: '0',
+        overflow: 'hidden',
+        width: '0px'
+      })),
+      transition(`CLOSED => OPEN`, animate('400ms ease-in-out')),
+      transition(`OPEN => CLOSED`, animate('400ms ease-in-out'))
+    ]),
+    trigger('expandedState', [
+      state(CLOSED, style({
+        opacity: '0',
+        overflow: 'hidden',
+        height: '0px'
+      })),
+      transition(`${OPEN} => ${CLOSED}`, animate('200ms ease-out')),
+      transition(`${CLOSED} => ${OPEN}`, animate('200ms ease-in')),
+    ]),
+    trigger('rotatedState', [
+      state(CLOSED, style({ transform: 'rotate(0)' })),
+      state(OPEN, style({ transform: 'rotate(180deg)' })),
+      transition(`${OPEN} => ${CLOSED}`, animate('300ms ease-out')),
+      transition(`${CLOSED} => ${OPEN}`, animate('300ms ease-in')),
+    ])
+  ]
 })
 export class FilterPanelComponent implements OnInit {
-  faTools = faTools;
+  faTimes = faTimes;
+  @Input()  isOpen = OPEN;
+  @Output() closeSide = new EventEmitter();
   constructor() { }
 
   _dashBoardData: DashBoardData;
@@ -36,6 +69,8 @@ export class FilterPanelComponent implements OnInit {
   @ViewChild('treeview') public tree: TreeViewComponent;
   @ViewChild('dataSources') public dataSources: TreeViewComponent;
 
+  expandedState = OPEN;
+  rotatedState = CLOSED;
 
   public data: string[] = ['All - Everywhere', 'UK Cornwall', 'UK Devon', 'United Kingdom', 'Australia', 'New Zealand'];
 // maps the appropriate column to fields property
@@ -77,5 +112,14 @@ export class FilterPanelComponent implements OnInit {
       const dataSourceSelected = this.dataSources.checkedNodes.find(a => parseInt(a, 10) == dataSource.id);
       dataSource.isChecked = dataSourceSelected ? true : false;
     });
+  }
+
+  closeMe() {
+    this.closeSide.emit();
+    // this.isOpen = this.isOpen === OPEN ? CLOSED : OPEN;
+  }
+
+  toggle() {
+    this.isOpen = this.isOpen === OPEN ? CLOSED : OPEN;
   }
 }
