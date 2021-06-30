@@ -47,7 +47,6 @@
     "@syncfusion/ej2-angular-buttons": "^19.1.63",
     "@syncfusion/ej2-angular-calendars": "^19.1.63",
     "@syncfusion/ej2-angular-dropdowns": "^19.1.63",
-    "@syncfusion/ej2-angular-navigations": "^19.1.63",
     "leaflet": "^1.7.1",
     "moment": "^2.29.1",
     "rxjs": "~6.6.3",
