@@ -6,7 +6,6 @@ import { MarkerService } from './marker.service';
 import { FilterPanelComponent } from './components/filter-panel/filter-panel.component';
 import { MapComponent } from './components/map/map.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { AccordionModule, TreeViewModule } from '@syncfusion/ej2-angular-navigations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ButtonModule, CheckBoxModule } from '@syncfusion/ej2-angular-buttons';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
@@ -15,6 +14,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { DetailPanelComponent } from './components/detail-panel/detail-panel.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { AccordionModule, TreeViewModule } from '@syncfusion/ej2-angular-navigations';
 
 @NgModule({
   declarations: [AppComponent, FilterPanelComponent, MapComponent, NavigationComponent, DetailPanelComponent],
