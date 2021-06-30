@@ -1,10 +1,11 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { DashboardService } from './services/dashboard.service';
 import { DashBoardData } from './models/dashboard-data.model';
 import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
 import { MapComponent } from './components/map/map.component';
 import { DetailPanelComponent } from './components/detail-panel/detail-panel.component';
 import { FilterPanelComponent } from './components/filter-panel/filter-panel.component';
+import { MapItem } from './models/map-item.model';
 
 
 const OPEN = 'OPEN';
@@ -24,11 +25,12 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('detailComponent') detailComponent: DetailPanelComponent;
 
 
-  detailPanelState = CLOSED;
+  detailPanelState = OPEN;
   filterPanelState = OPEN;
+  selectedMapItem: MapItem;
 
 
-  constructor(private dashboardService: DashboardService) {
+  constructor(private dashboardService: DashboardService, private ref: ChangeDetectorRef) {
 
 
   }
@@ -56,8 +58,9 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
-  pinClicked($event: any) {
+  pinClicked(mapItem: MapItem) {
     this.detailPanelState = OPEN;
+    this.selectedMapItem = mapItem;
   }
 
   toggleSideBar() {
@@ -66,5 +69,13 @@ export class AppComponent implements AfterViewInit {
 
   closeSide() {
     this.filterPanelState = CLOSED;
+  }
+
+  toggleDetailBar() {
+    this.detailPanelState = this.detailPanelState == CLOSED ? OPEN : CLOSED;
+  }
+
+  detailChanged() {
+    this.detailPanelState = CLOSED;
   }
 }

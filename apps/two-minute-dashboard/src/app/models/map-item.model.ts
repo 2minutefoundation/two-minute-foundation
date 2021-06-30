@@ -5,4 +5,5 @@ export class MapItem {
   itemType: string;
   latitude: number;
   longitude: number;
+  imageUrl: string;
 }

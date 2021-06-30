@@ -2,4 +2,33 @@
   <header>
     <h1><fa-icon (click)='closeMe()' [icon]="faTimes" title='Details' aria-label='Details'></fa-icon>Detail</h1>
   </header>
+  <aside>
+    <h2>Items Collected</h2>
+<!--    <h2>{{selectedMapItem?.title}}</h2>-->
+
+<!--    <img [src]='selectedMapItem?.imageUrl' alt=''>-->
+
+<!--    <p>{{selectedMapItem?.description}}</p>-->
+<!--    <p>-->
+<!--      Lat/Lon: {{selectedMapItem?.latitude.toFixed(4)}}/{{selectedMapItem?.longitude.toFixed(4)}}-->
+<!--    </p>-->
+
+    <ngx-charts-pie-chart
+      [view]="view"
+      [results]="single"
+      [gradient]="gradient"
+      [legend]="showLegend"
+      [legendPosition]="legendPosition"
+      [labels]="showLabels"
+      [doughnut]="isDoughnut"
+      (select)="onSelect($event)"
+      (activate)="onActivate($event)"
+      (deactivate)="onDeactivate($event)"
+    >
+    </ngx-charts-pie-chart>
+
+<!--    <br><br><br><br><br>-->
+<!--    <p>*{{selectedMapItem | json}}*</p>-->
+  </aside>
+
 </div>

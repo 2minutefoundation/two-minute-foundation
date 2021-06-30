@@ -14,10 +14,25 @@ import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { DetailPanelComponent } from './components/detail-panel/detail-panel.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [AppComponent, FilterPanelComponent, MapComponent, NavigationComponent, DetailPanelComponent],
-  imports: [BrowserModule, HttpClientModule, AccordionModule, AccordionModule, FontAwesomeModule, CheckBoxModule, DatePickerModule, ButtonModule, TreeViewModule, DropDownListModule, LeafletModule, BrowserAnimationsModule ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AccordionModule,
+    AccordionModule,
+    FontAwesomeModule,
+    CheckBoxModule,
+    DatePickerModule,
+    ButtonModule,
+    TreeViewModule,
+    DropDownListModule,
+    LeafletModule,
+    BrowserAnimationsModule,
+    NgxChartsModule,
+  ],
   providers: [MarkerService],
   bootstrap: [AppComponent],
 })

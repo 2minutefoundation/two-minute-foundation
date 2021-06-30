@@ -7,7 +7,7 @@
 <!--    </div>-->
 <!--  </div>-->
 <!--</div>-->
-<div style="height: 100%"
+<div style="height: 100%" (leafletClick)='test($event)' (click)='test2()'
      leaflet
      [leafletOptions]="options">
   <div *ngFor="let m of markers" [leafletLayer]="m"></div>

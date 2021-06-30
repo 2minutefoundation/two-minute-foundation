@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
 import { MarkerService } from './../../marker.service';
 import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
 import { DashBoardData } from '../../models/dashboard-data.model';
 
-import { circle, icon, latLng, marker, Marker, polygon, tileLayer } from 'leaflet';
+import { circle, icon, latLng, LeafletMouseEvent, marker, Marker, polygon, tileLayer } from 'leaflet';
 import { MapItem } from '../../models/map-item.model';
 
 
@@ -30,7 +30,7 @@ L.Marker.prototype.options.icon = iconDefault;
 })
 export class MapComponent implements OnInit {
 
-  @Output() pinClicked = new EventEmitter<boolean>();
+  @Output() pinClicked = new EventEmitter<MapItem>();
 // Open Street Map definitions
   // Open Street Map definitions
   LAYER_OSM = tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -66,10 +66,6 @@ export class MapComponent implements OnInit {
   }
 
   @Input() set dashBoardData(value: DashBoardData) {
-
-    // this.layersControl.overlays.ddfd =  marker([ 46.879966, -121.726909 ], marker([ 46.879966, -121.726909 ]);
-
-
     if (value) {
       this.markers = [];
 
@@ -77,83 +73,6 @@ export class MapComponent implements OnInit {
         this.addMarker(point);
       })
     }
-
-
-    // this.addMarker();
-    // this.addMarker();
-    // this.addMarker();
-
-
-    // // console.log('plot points',value.mapItems);
-    //
-    // alert('set dashboard data');
-    // // if (L.markersLayer) {
-    //   // L.markersLayer.markers.clean();
-    //   // this.markersLayer.markers.pop();
-    //   console.log('+++markers', L.marker.markersLayer);
-    //   // this.markersLayer.m
-    //
-    // // }
-    //
-    //
-    // let StationIcon = L.Icon.extend({
-    //   options: {
-    //     iconSize:     [20, 30],
-    //     shadowSize:   [20, 30],
-    //     iconAnchor:   [10, 15],
-    //     shadowAnchor: [0, 0],
-    //     popupAnchor:  [0, 0]
-    //   }
-    // });
-    //
-    // let beachCleanIcon = new StationIcon({
-    //   iconUrl: '/assets/images/pins/beach-clean.svg',
-    //   // shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png'
-    // })
-    //
-    // let streetCleanIcon = new StationIcon({
-    //   iconUrl: '/assets/images/pins/street-clean.svg',
-    //   // shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png'
-    // })
-    //
-    // let litterPickIcon = new StationIcon({
-    //   iconUrl: '/assets/images/pins/litter-pick.svg',
-    //   // shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png'
-    // })
-    //
-    // let checkInIcon = new StationIcon({
-    //   iconUrl: '/assets/images/pins/maps-black.png',
-    //   // shadowUrl: 'http://leafletjs.com/examples/custom-icons/maps-black.png'
-    // })
-    //
-    //
-    // if (value && value.mapItems) {
-    //   this._dashBoardData = value;
-    //   this._dashBoardData.mapItems.forEach((mapItem) => {
-    //     // console.log('adding pin at ', [mapItem.latitude, mapItem.longitude])
-    //     let marker: any;
-    //     if (mapItem.itemType == '0') {
-    //       marker = L.marker([mapItem.latitude, mapItem.longitude], {icon: beachCleanIcon});
-    //     }
-    //
-    //     if (mapItem.itemType == '1') {
-    //       marker = L.marker([mapItem.latitude, mapItem.longitude], {icon: litterPickIcon});
-    //     }
-    //
-    //     if (mapItem.itemType == '2') {
-    //       marker = L.marker([mapItem.latitude, mapItem.longitude], {icon: streetCleanIcon});
-    //     }
-    //
-    //     if (mapItem.itemType == 'checkin') {
-    //       marker = L.marker([mapItem.latitude, mapItem.longitude], {icon: checkInIcon});
-    //     }
-    //     // const marker = L.marker([mapItem.latitude, mapItem.longitude]
-    //
-    //
-    //     marker.addTo(this.map);
-    //   });
-    // }
-
   }
 
   // @Input() dashBoardData: DashBoardData;
@@ -167,7 +86,7 @@ export class MapComponent implements OnInit {
   enableGestures = true;
   sidebarOpen = true;
 
-  constructor(private markerService: MarkerService) {
+  constructor(private markerService: MarkerService, private zone: NgZone) {
   }
 
   private initMap(): void {
@@ -197,7 +116,6 @@ export class MapComponent implements OnInit {
     this.sidebar.show();
   }
 
-
   addMarker(mapItem: MapItem) {
 
     // board
@@ -211,10 +129,12 @@ export class MapComponent implements OnInit {
         })
       }
     );
+
     newMarker.on('click', () => {
-      this.pinClicked.emit()
-      // alert('clicked')
-    })
+      this.zone.run(() => this.onMarkerClick(mapItem))
+    }).bindPopup(`<strong>${mapItem.title}<strong><img style='width: 100%; min-width: 300px;margin-top:6px;${mapItem.imageUrl ? '' : 'display: none;'}' src='${mapItem.imageUrl}'><p>${mapItem.description}</p>`);
+
+
     this.markers.push(newMarker);
 
     /// marker = L.marker([mapItem.latitude, mapItem.longitude], {icon: beachCleanIcon});
@@ -288,4 +208,16 @@ export class MapComponent implements OnInit {
    //  this.markerService.makeCapitalMarkers(this.map);
   }
 
+  private onMarkerClick(mapItem: MapItem) {
+    this.pinClicked.emit(mapItem);
+  }
+
+  test($event: LeafletMouseEvent) {
+    alert(JSON.stringify($event));
+
+  }
+
+  test2() {
+    // alert('test2');
+  }
 }

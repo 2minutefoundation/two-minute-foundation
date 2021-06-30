@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faChartBar, faMap } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'two-minute-foundation-navigation',
@@ -8,8 +8,11 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 })
 export class NavigationComponent implements OnInit {
   faBars = faBars;
+  faChartBar = faChartBar;
+  faMap = faMap;
 
   @Output() toggleSide = new EventEmitter();
+  @Output() toggleDetail = new EventEmitter();
 
   constructor() { }
 
@@ -18,5 +21,9 @@ export class NavigationComponent implements OnInit {
 
   toggleSideBar() {
     this.toggleSide.emit();
+  }
+
+  toggleDetailBar() {
+    this.toggleDetail.emit();
   }
 }

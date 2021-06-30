@@ -30,6 +30,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "12.0.0",
+    "@angular/cdk": "^12.1.0",
     "@angular/common": "12.0.0",
     "@angular/compiler": "12.0.0",
     "@angular/core": "12.0.0",
@@ -42,6 +43,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@nrwl/angular": "12.3.3",
+    "@swimlane/ngx-charts": "^18.0.1",
     "@syncfusion/ej2-angular-buttons": "^19.1.63",
     "@syncfusion/ej2-angular-calendars": "^19.1.63",
     "@syncfusion/ej2-angular-dropdowns": "^19.1.63",

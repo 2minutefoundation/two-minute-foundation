@@ -1,8 +1,8 @@
 <div class='dashboard'>
-  <two-minute-foundation-navigation (toggleSide)='toggleSideBar()'></two-minute-foundation-navigation>
+  <two-minute-foundation-navigation (toggleSide)='toggleSideBar()' (toggleDetail)='toggleDetailBar()'></two-minute-foundation-navigation>
   <two-minute-foundation-map #mapComponent [dashBoardData]='dashboardData' (pinClicked)='pinClicked($event)'></two-minute-foundation-map>
-  <two-minute-foundation-filter-panel [dashBoardData]='dashboardData' [isOpen]='filterPanelState' (closeSide)='closeSide()' >
+  <two-minute-foundation-filter-panel  [dashBoardData]='dashboardData' [isOpen]='filterPanelState' (closeSide)='closeSide()' >
     <button (click)='filterUpdates()' class='update-map-button' ejs-button>Update Map</button>
   </two-minute-foundation-filter-panel>
-  <two-minute-foundation-detail-panel #detailComponent [isOpen]='detailPanelState' ></two-minute-foundation-detail-panel>
+  <two-minute-foundation-detail-panel [dashBoardData]='dashboardData' [selectedMapItem]='selectedMapItem' #detailComponent [isOpen]='detailPanelState' (isOpenChange)='detailChanged()' ></two-minute-foundation-detail-panel>
 </div>
