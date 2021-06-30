@@ -7,44 +7,6 @@ import { DashBoardData } from '../../models/dashboard-data.model';
 const OPEN = 'OPEN';
 const CLOSED = 'CLOSED';
 
-// export var single = [
-//   {
-//     "name": "Germany",
-//     "value": 8940000
-//   },
-//   {
-//     "name": "USA",
-//     "value": 5000000
-//   },
-//   {
-//     "name": "France",
-//     "value": 7200000
-//   },
-//   {
-//     "name": "UK",
-//     "value": 6200000
-//   }
-// ];
-
-// export var single2 = [
-//   {
-//     "name": "Germany1",
-//     "value": 8940000
-//   },
-//   {
-//     "name": "USA1",
-//     "value": 5000000
-//   },
-//   {
-//     "name": "France1",
-//     "value": 7200000
-//   },
-//   {
-//     "name": "UK1",
-//     "value": 6200000
-//   }
-// ];
-
 @Component({
   selector: 'two-minute-foundation-detail-panel',
   templateUrl: './detail-panel.component.html',
@@ -71,24 +33,6 @@ export class DetailPanelComponent implements OnInit {
   @Output() isOpenChange = new EventEmitter<string>();
   @Input() selectedMapItem: MapItem;
 
-  // single = [
-  //   {
-  //     "name": "Germany",
-  //     "value": 8940000
-  //   },
-  //   {
-  //     "name": "USA",
-  //     "value": 5000000
-  //   },
-  //   {
-  //     "name": "France",
-  //     "value": 7200000
-  //   },
-  //   {
-  //     "name": "UK",
-  //     "value": 6200000
-  //   }
-  // ];
 
   _dashBoardData: DashBoardData;
   get dashBoardData(): DashBoardData {
@@ -99,26 +43,9 @@ export class DetailPanelComponent implements OnInit {
     // alert('dashBoardData: ' + JSON.stringify(value));
     if (value) {
 
-      this.single = value.litterSummaryChartData;
+     this.single = value.litterSummaryChartData;
 
-      // this.single = [
-      //   {
-      //     "name": "Germany22",
-      //     "value": 1940000
-      //   },
-      //   {
-      //     "name": "USA22",
-      //     "value": 2000000
-      //   },
-      //   {
-      //     "name": "France22",
-      //     "value": 5200000
-      //   },
-      //   {
-      //     "name": "UK222",
-      //     "value": 3200000
-      //   }
-      // ];
+      //this.dashBoardData = value;
     }
   }
 
@@ -127,7 +54,7 @@ export class DetailPanelComponent implements OnInit {
 
   // options
   gradient: boolean = true;
-  showLegend: boolean = true;
+  showLegend: boolean = false;
   showLabels: boolean = true;
   isDoughnut: boolean = false;
   legendPosition: string = 'below';

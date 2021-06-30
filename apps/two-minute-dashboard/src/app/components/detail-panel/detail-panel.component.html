@@ -3,7 +3,74 @@
     <h1><fa-icon (click)='closeMe()' [icon]="faTimes" title='Details' aria-label='Details'></fa-icon>Detail</h1>
   </header>
   <aside>
-    <h2>Items Collected</h2>
+    <ejs-accordion>
+      <e-accordionitems>
+        <e-accordionitem expanded='true'>
+          <ng-template #header>
+            <div>Selection</div>
+          </ng-template>
+          <ng-template #content>
+            <div>
+              <ul>
+                <li>
+                  <strong>Data sources:</strong> x, y
+                </li>
+                <li>
+                  <strong>Date Range:</strong> xxx to yyy
+                </li>
+                <li>
+                  <strong>Litter Types:</strong> All
+                </li>
+                <li>
+                  <strong>Location:</strong> Global
+                </li>
+              </ul>
+
+            </div>
+          </ng-template>
+        </e-accordionitem>
+
+        <e-accordionitem expanded='true'>
+          <ng-template #header>
+            <div>Litter Collected Chart</div>
+          </ng-template>
+          <ng-template #content>
+            <ngx-charts-pie-chart
+              [view]='view'
+              [results]='single'
+              [gradient]='gradient'
+              [legend]='showLegend'
+              [legendPosition]='legendPosition'
+              [labels]='showLabels'
+              [doughnut]='isDoughnut'
+              (select)='onSelect($event)'
+              (activate)='onActivate($event)'
+              (deactivate)='onDeactivate($event)'
+            ></ngx-charts-pie-chart>
+          </ng-template>
+        </e-accordionitem>
+
+        <e-accordionitem expanded='true'>
+          <ng-template #header>
+            <div>Litter Collected Detail</div>
+          </ng-template>
+          <ng-template #content>
+            <div>
+              <ul *ngIf='single'>
+                <li *ngFor='let item of single'>
+                  {{item.name}} <em>({{item.value}})</em>
+                </li>
+              </ul>
+            </div>
+
+          </ng-template>
+        </e-accordionitem>
+
+      </e-accordionitems>
+    </ejs-accordion>
+
+
+
 <!--    <h2>{{selectedMapItem?.title}}</h2>-->
 
 <!--    <img [src]='selectedMapItem?.imageUrl' alt=''>-->
@@ -13,19 +80,7 @@
 <!--      Lat/Lon: {{selectedMapItem?.latitude.toFixed(4)}}/{{selectedMapItem?.longitude.toFixed(4)}}-->
 <!--    </p>-->
 
-    <ngx-charts-pie-chart
-      [view]="view"
-      [results]="single"
-      [gradient]="gradient"
-      [legend]="showLegend"
-      [legendPosition]="legendPosition"
-      [labels]="showLabels"
-      [doughnut]="isDoughnut"
-      (select)="onSelect($event)"
-      (activate)="onActivate($event)"
-      (deactivate)="onDeactivate($event)"
-    >
-    </ngx-charts-pie-chart>
+
 
 <!--    <br><br><br><br><br>-->
 <!--    <p>*{{selectedMapItem | json}}*</p>-->
