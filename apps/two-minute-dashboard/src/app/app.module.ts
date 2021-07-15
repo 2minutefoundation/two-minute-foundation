@@ -15,6 +15,7 @@ import { DetailPanelComponent } from './components/detail-panel/detail-panel.com
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { AccordionModule, TreeViewModule } from '@syncfusion/ej2-angular-navigations';
+import { LeafletDrawModule } from '@asymmetrik/ngx-leaflet-draw';
 
 @NgModule({
   declarations: [AppComponent, FilterPanelComponent, MapComponent, NavigationComponent, DetailPanelComponent],

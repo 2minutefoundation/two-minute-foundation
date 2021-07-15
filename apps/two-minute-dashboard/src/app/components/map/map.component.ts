@@ -4,8 +4,21 @@ import { MarkerService } from './../../marker.service';
 import { SidebarComponent } from '@syncfusion/ej2-angular-navigations';
 import { DashBoardData } from '../../models/dashboard-data.model';
 
-import { circle, icon, latLng, LeafletMouseEvent, marker, Marker, polygon, tileLayer } from 'leaflet';
+import {
+  Browser,
+  circle,
+  featureGroup,
+  FeatureGroup,
+  icon,
+  latLng,
+  LeafletMouseEvent,
+  marker,
+  Marker,
+  polygon,
+  tileLayer
+} from 'leaflet';
 import { MapItem } from '../../models/map-item.model';
+import win = Browser.win;
 
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
@@ -85,11 +98,17 @@ export class MapComponent implements OnInit {
   public closeOnDocumentClick: boolean = true;
   enableGestures = true;
   sidebarOpen = true;
+  drawItems: FeatureGroup = featureGroup();
+
+
 
   constructor(private markerService: MarkerService, private zone: NgZone) {
   }
 
   private initMap(): void {
+
+
+
     // this.map = L.map('map', {
     //   center: [ 52.8282, -3 ],
     //   zoom: 3
@@ -205,7 +224,18 @@ export class MapComponent implements OnInit {
   ngOnInit(): void {
     this.initMap();
 
-   //  this.markerService.makeCapitalMarkers(this.map);
+    // this.map.on('click', (a: any) => {
+    //   this.zone.run(() => this.test(a))
+    //   self = this;
+    // });
+// const self = this;
+//     window.setTimeout(() => {
+//       self.map.map.on('click', function(e) {
+//         alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+//       });
+//     }, 1000)
+//
+//    //  this.markerService.makeCapitalMarkers(this.map);
   }
 
   private onMarkerClick(mapItem: MapItem) {
@@ -213,11 +243,12 @@ export class MapComponent implements OnInit {
   }
 
   test($event: LeafletMouseEvent) {
-    alert(JSON.stringify($event));
-
+    alert(JSON.stringify($event.latlng));
   }
 
-  test2() {
-    // alert('test2');
-  }
+
+
+
+
+
 }
