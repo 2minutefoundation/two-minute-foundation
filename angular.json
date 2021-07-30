@@ -57,7 +57,7 @@
                 "output": "./assets"
               }
             ],
-            "styles": ["apps/two-minute-dashboard/src/styles.scss", "./node_modules/leaflet/dist/leaflet.css"],
+            "styles": ["apps/two-minute-dashboard/src/styles.scss", "./node_modules/leaflet/dist/leaflet.css", "./node_modules/leaflet-draw/dist/leaflet.draw.css"],
             "scripts": []
           },
           "configurations": {

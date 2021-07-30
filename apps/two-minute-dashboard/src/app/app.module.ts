@@ -31,6 +31,7 @@ import { LeafletDrawModule } from '@asymmetrik/ngx-leaflet-draw';
     TreeViewModule,
     DropDownListModule,
     LeafletModule,
+    LeafletDrawModule,
     BrowserAnimationsModule,
     NgxChartsModule,
   ],

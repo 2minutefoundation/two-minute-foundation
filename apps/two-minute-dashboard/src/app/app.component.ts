@@ -6,6 +6,7 @@ import { MapComponent } from './components/map/map.component';
 import { DetailPanelComponent } from './components/detail-panel/detail-panel.component';
 import { FilterPanelComponent } from './components/filter-panel/filter-panel.component';
 import { MapItem } from './models/map-item.model';
+import { LatLong } from './models/latlong.model';
 
 
 const OPEN = 'OPEN';
@@ -77,5 +78,18 @@ export class AppComponent implements AfterViewInit {
 
   detailChanged() {
     this.detailPanelState = CLOSED;
+  }
+
+  areaSelected($event: LatLong[], isCustomSelection = false) {
+    this.dashboardData.selectionPolygon = $event;
+    this.filterUpdates();
+  }
+
+  clearSelectedArea() {
+    this.dashboardData.selectionPolygon = [];
+
+    this.mapComponent.clearShapes();
+
+    this.filterUpdates();
   }
 }

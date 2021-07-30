@@ -33,8 +33,8 @@ export class DetailPanelComponent implements OnInit {
   @Output() isOpenChange = new EventEmitter<string>();
   @Input() selectedMapItem: MapItem;
 
-
   _dashBoardData: DashBoardData;
+  private dbd: DashBoardData;
   get dashBoardData(): DashBoardData {
     return this._dashBoardData;
   }
@@ -45,7 +45,16 @@ export class DetailPanelComponent implements OnInit {
 
      this.single = value.litterSummaryChartData;
 
-      //this.dashBoardData = value;
+      this.dbd = value;
+
+      // set selected area name
+      const selectedArea = value.namedLocations.find(i => i.selected);
+      if (selectedArea) {
+        this.selectedAreaName = selectedArea.name;
+      }
+
+      this.providedLocation = value.locationSuppliedChartData;
+
     }
   }
 
@@ -58,12 +67,16 @@ export class DetailPanelComponent implements OnInit {
   showLabels: boolean = true;
   isDoughnut: boolean = false;
   legendPosition: string = 'below';
+  providedLocation: any[] = []
 
   // colorScheme = {
   //   domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   // };
+  selectedAreaName: string;
+
 
   constructor() {
+    this.providedLocation = [];
     this.single = [
       // {
       //   "name": "Germany",

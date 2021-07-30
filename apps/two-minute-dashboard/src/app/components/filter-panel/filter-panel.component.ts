@@ -5,6 +5,10 @@ import { DataSource } from '../../models/data-source.mode';
 import { DashBoardData } from '../../models/dashboard-data.model';
 import * as moment from 'moment';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { ChangeEventArgs } from '@syncfusion/ej2-angular-dropdowns';
+import { LatLong } from '../../models/latlong.model';
+import { HttpClient } from '@angular/common/http';
+
 
 const OPEN = 'OPEN';
 const CLOSED = 'CLOSED';
@@ -48,7 +52,8 @@ export class FilterPanelComponent implements OnInit {
   faTimes = faTimes;
   @Input()  isOpen = OPEN;
   @Output() closeSide = new EventEmitter();
-  constructor() { }
+  @Output() areaSelected = new EventEmitter<LatLong[]>()
+  constructor(private http: HttpClient) { }
 
   _dashBoardData: DashBoardData;
   get dashBoardData(): DashBoardData {
@@ -66,7 +71,7 @@ export class FilterPanelComponent implements OnInit {
   @Output() valueChange = new EventEmitter();
 
 
-  @ViewChild('treeview') public tree: TreeViewComponent;
+  @ViewChild('litterTypes') public litterTypes: TreeViewComponent;
   @ViewChild('dataSources') public dataSources: TreeViewComponent;
 
   expandedState = OPEN;
@@ -83,7 +88,7 @@ export class FilterPanelComponent implements OnInit {
 //set the checknodes to the TreeView
   public checkedNodes: string[] = ['2','6'];
   public nodeChecked(args): void{
-    alert("The checked node's id is: "+this.tree.checkedNodes);
+    // alert("The checked node's id is: "+this.tree.checkedNodes);
 
   }
 
@@ -121,5 +126,69 @@ export class FilterPanelComponent implements OnInit {
 
   toggle() {
     this.isOpen = this.isOpen === OPEN ? CLOSED : OPEN;
+  }
+
+  polyAreaSelected($event: ChangeEventArgs) {
+    console.log($event.value);
+
+    let file = '';
+    switch ($event.value) {
+      case 'All - Everywhere':
+        file = '/assets/data/all.json'
+        break
+      case 'UK Cornwall':
+        file = '/assets/data/cornwall.json'
+        break
+      case 'UK Devon':
+        file = '/assets/data/devon.json'
+        break;
+      case 'United Kingdom':
+        file = '/assets/data/united-kingdom.json'
+        break;
+      case 'Australia':
+        file = '/assets/data/australia.json'
+        break;
+      case 'New Zealand':
+        file = '/assets/data/new-zealand.json'
+        break;
+    }
+
+    this.http.get(file).subscribe((area : LatLong[]) => {
+      this.areaSelected.emit(area);
+
+    });
+
+    // switch ($event.value) {
+    //   case 'All - Everywhere':
+    //     this.areaSelected.emit([])
+    //     break
+    //   case 'UK Cornwall':
+    //     console.log('##]#]#]', cornwall);
+    //
+    //     this.areaSelected.emit(cornwall);
+    //     break
+    //   case 'UK Devon':
+    //     this.areaSelected.emit(devon);
+    //     break;
+    //   case 'United Kingdom':
+    //     this.areaSelected.emit(unitedKingdom);
+    //     break;
+    //   case 'Australia':
+    //     this.areaSelected.emit(australia);
+    //     break;
+    //   case 'New Zealand':
+    //     this.areaSelected.emit(newZealand);
+    //     break;
+    // }
+
+
+  }
+
+  litterTypesChanged($event: NodeCheckEventArgs) {
+    this.dashBoardData.litterTypes.forEach((litterItem) => {
+      // is this data source selected?
+      const litterItemSelected = this.litterTypes.checkedNodes.find(a => parseInt(a, 10) == litterItem.id);
+      litterItem.isChecked = litterItemSelected ? true : false;
+    });
   }
 }

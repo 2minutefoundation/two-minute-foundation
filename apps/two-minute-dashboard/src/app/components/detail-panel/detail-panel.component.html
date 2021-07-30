@@ -13,17 +13,35 @@
             <div>
               <ul>
                 <li>
-                  <strong>Data sources:</strong> x, y
+                  <strong>Data sources:</strong> &nbsp;
+                  <ng-container *ngFor='let dataSource of dbd?.dataSources; let last = last'>
+                    <ng-container *ngIf='dataSource.isChecked'>{{dataSource.name}}</ng-container>
+                    <ng-container *ngIf='!last'>, </ng-container>
+                  </ng-container>
                 </li>
                 <li>
-                  <strong>Date Range:</strong> xxx to yyy
+                  <strong>Date Range:</strong> {{dbd?.from | date}} to {{dbd?.to | date}}
                 </li>
                 <li>
-                  <strong>Litter Types:</strong> All
+                  <strong>Litter Types:</strong> &nbsp;
+                  <ng-container *ngFor='let litterType of dbd?.litterTypes; let last = last'>
+                    <ng-container *ngIf='litterType.isChecked'>{{litterType.name}}</ng-container>
+                    {{litterType.name}}
+                    <ng-container *ngIf='!last'>, </ng-container>
+                  </ng-container>
                 </li>
-                <li>
-                  <strong>Location:</strong> Global
-                </li>
+<!--                <li>-->
+<!--                  <strong>Location:</strong> &nbsp;-->
+<!--                  <ng-container *ngIf='dbd.selectionPolygon.length < 1'>-->
+<!--                    Global-->
+<!--                  </ng-container>-->
+<!--                  <ng-container *ngIf='dbd.selectionPolygon.length > 0 && !selectedAreaName'>-->
+<!--                    Custom Selection-->
+<!--                  </ng-container>-->
+<!--                  <ng-container *ngIf='dbd.selectionPolygon.length > 0 && selectedAreaName'>-->
+<!--                    {{selectedAreaName}}-->
+<!--                  </ng-container>-->
+<!--                </li>-->
               </ul>
 
             </div>
@@ -66,8 +84,30 @@
           </ng-template>
         </e-accordionitem>
 
+        <e-accordionitem expanded='true'>
+          <ng-template #header>
+            <div>Location Provided</div>
+          </ng-template>
+          <ng-template #content>
+            <ngx-charts-pie-chart
+              [view]='view'
+              [results]='providedLocation'
+              [gradient]='gradient'
+              [legend]='showLegend'
+              [legendPosition]='legendPosition'
+              [labels]='showLabels'
+              [doughnut]='isDoughnut'
+              (select)='onSelect($event)'
+              (activate)='onActivate($event)'
+              (deactivate)='onDeactivate($event)'
+            ></ngx-charts-pie-chart>
+          </ng-template>
+        </e-accordionitem>
+
       </e-accordionitems>
     </ejs-accordion>
+
+
 
 
 

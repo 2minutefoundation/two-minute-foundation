@@ -1,14 +1,6 @@
-<!--<div class='map'>-->
-<!--  <div class='map-frame'>-->
-<!--&lt;!&ndash;    <div id='map'></div>&ndash;&gt;-->
-
-<!--    <div leaflet style="height: 300px;" [leafletOptions]="options">-->
-<!--      <div *ngFor="let m of markers" [leafletLayer]="m"></div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-<div style="height: 100%" (leafletClick)='test($event)'
-     leaflet
-     [leafletOptions]="options">
+<div style="height: 100%" id='map' #mymap (leafletMapReady)='onMapReady($event)' (leafletClick)='test($event)'
+     leaflet leafletDraw
+     [leafletOptions]="options" [leafletDrawLocal]='drawnItems'
+     (leafletDrawReady)="onDrawReady($event)" (leafletDrawEditStop)='drawDone($event)' (leafletDrawCreated)='drawDone($event)' [leafletDrawOptions]='drawOptions'  >
   <div *ngFor="let m of markers" [leafletLayer]="m"></div>
 </div>

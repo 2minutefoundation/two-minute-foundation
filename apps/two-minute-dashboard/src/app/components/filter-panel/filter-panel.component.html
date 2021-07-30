@@ -41,7 +41,7 @@
           <div>Litter Type</div>
         </ng-template>
         <ng-template #content>
-          <div id='treeparent'><ejs-treeview #treeview="" id='treeelement' [fields]='field' [showCheckBox]='showCheckBox' (nodeChecked)='nodeChecked($event)'></ejs-treeview></div>
+          <div id='treeparent'><ejs-treeview #litterTypes id='treeelement' [fields]='field' [showCheckBox]='showCheckBox' (nodeChecked)='litterTypesChanged($event)'></ejs-treeview></div>
         </ng-template>
       </e-accordionitem>
       <e-accordionitem>
@@ -49,7 +49,7 @@
           <div>Location</div>
         </ng-template>
         <ng-template #content>
-          <ejs-dropdownlist id='diacritics' [dataSource]='data' [allowFiltering]='true' [ignoreAccent]='true' placeholder='Select a value'
+          <ejs-dropdownlist id='diacritics' [dataSource]='data' [allowFiltering]='true' [ignoreAccent]='true' (change)='polyAreaSelected($event)' placeholder='Select a value'
                             filterBarPlaceholder='e.g: Cornwall'>
           </ejs-dropdownlist>
         </ng-template>
@@ -57,4 +57,6 @@
     </e-accordionitems>
   </ejs-accordion>
   <ng-content></ng-content>
+
+<!--  *{{dashBoardData?.litterTypes | json}}*-->
 </div>
