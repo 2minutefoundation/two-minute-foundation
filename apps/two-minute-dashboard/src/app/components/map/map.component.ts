@@ -86,12 +86,9 @@ export class MapComponent implements OnInit, AfterViewInit {
     attribution: 'Open Street Map'
   });
 
+
   // Values to bind to Leaflet Directive
-  options = {
-    layers: [this.LAYER_OSM],
-    zoom: 6,
-    center: latLng(51, -2.5)
-  };
+  options = this.getMapOptions();
 
 
   // layersControl = {
@@ -125,7 +122,11 @@ export class MapComponent implements OnInit, AfterViewInit {
         this.addMarker(point);
       })
 
-      this.theMap.fitBounds(this.dashBoardData.bounds, { animate: true });
+      console.log('*****', this.dashBoardData);
+      if (this.dashBoardData.selectionPolygon.length > 0) {
+        this.theMap.fitBounds(this.dashBoardData.bounds, { animate: true });
+      }
+
     }
   }
 
@@ -148,6 +149,13 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+
+    // alert(window.innerWidth);
+
+
+
+
+
    // alert(0);
     this.initMap();
   //  alert(1);
@@ -469,7 +477,8 @@ console.log('draw', e);
 
     /// let group = new L.featureGroup([marker1, marker2, marker3]);
 
-    this.theMap.fitBounds(this.dashBoardData.bounds);
+    // ************************
+    // this.theMap.fitBounds(this.dashBoardData.bounds);
 
     // let bounds = L.LatLngBounds;
     // bounds
@@ -484,5 +493,25 @@ console.log('draw', e);
   clearShapes() {
     // this.theMap.removeLayer(L.lat)
     this.theMap.removeLayer(this.polyLayer);
+  }
+
+  private getMapOptions() {
+    let options: any;
+    if (window.innerWidth > 2000) {
+      // alert('big');
+      options = {
+        layers: [this.LAYER_OSM],
+        zoom: 7,
+        center: latLng(55, -2.3)
+      };
+    } else {
+      //  alert('small');
+      options = {
+        layers: [this.LAYER_OSM],
+        zoom: 6,
+        center: latLng(47, -2.3)
+      };
+    }
+    return options;
   }
 }
