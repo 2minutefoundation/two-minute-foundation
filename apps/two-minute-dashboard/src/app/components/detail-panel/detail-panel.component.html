@@ -26,7 +26,6 @@
                   <strong>Litter Types:</strong> &nbsp;
                   <ng-container *ngFor='let litterType of dbd?.litterTypes; let last = last'>
                     <ng-container *ngIf='litterType.isChecked'>{{litterType.name}}</ng-container>
-                    {{litterType.name}}
                     <ng-container *ngIf='!last'>, </ng-container>
                   </ng-container>
                 </li>
