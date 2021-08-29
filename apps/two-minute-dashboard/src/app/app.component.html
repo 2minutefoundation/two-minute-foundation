@@ -3,7 +3,7 @@
 <div class='dashboard'>
   <two-minute-foundation-navigation (toggleSide)='toggleSideBar()' (toggleDetail)='toggleDetailBar()'></two-minute-foundation-navigation>
   <two-minute-foundation-map #mapComponent [dashBoardData]='dashboardData' (pinClicked)='pinClicked($event)' (areaSelected)='areaSelected($event, true)'></two-minute-foundation-map>
-  <two-minute-foundation-filter-panel (areaSelected)='areaSelected($event)'  [dashBoardData]='dashboardData' [isOpen]='filterPanelState' (closeSide)='closeSide()' >
+  <two-minute-foundation-filter-panel (areaSelected)='areaSelected($event)'  [dashBoardData]='dashboardData' [isOpen]='filterPanelState' (closeSide)='closeSide()' (groupBeenSelected)='groupSelected($event)' >
     <button *ngIf='dashboardData?.selectionPolygon.length > 0' (click)='clearSelectedArea()' class='update-map-button' ejs-button>X Clear Custom Selected Area</button>
     <button (click)='filterUpdates()' class='update-map-button' ejs-button>Update Map</button>
 

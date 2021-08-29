@@ -52,7 +52,8 @@ export class FilterPanelComponent implements OnInit {
   faTimes = faTimes;
   @Input()  isOpen = OPEN;
   @Output() closeSide = new EventEmitter();
-  @Output() areaSelected = new EventEmitter<LatLong[]>()
+  @Output() areaSelected = new EventEmitter<LatLong[]>();
+  @Output() groupBeenSelected = new EventEmitter<number>()
   constructor(private http: HttpClient) { }
 
   _dashBoardData: DashBoardData;
@@ -64,6 +65,10 @@ export class FilterPanelComponent implements OnInit {
       this._dashBoardData = value;
       this.field2 = { dataSource: value.dataSources, id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
       this.field = { dataSource: value.litterTypes, id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
+
+      // this.groups.forEach(() => {
+      //
+      // });
     }
   };
 
@@ -78,6 +83,8 @@ export class FilterPanelComponent implements OnInit {
   rotatedState = CLOSED;
 
   public data: string[] = ['All - Everywhere', 'UK Cornwall', 'UK Devon', 'United Kingdom', 'Australia', 'New Zealand'];
+  public groups: string[] = ['All - Everywhere1', 'UK Cornwall1', 'UK Devon1', 'United Kingdom1', 'Australia1', 'New Zealand1'];
+
 // maps the appropriate column to fields property
   public field: any; //  = { dataSource: this.countries, id: 'id', parentID: 'pid', text: 'name', hasChildren: 'hasChild' };
 
@@ -87,6 +94,7 @@ export class FilterPanelComponent implements OnInit {
   public showCheckBox: boolean = true;
 //set the checknodes to the TreeView
   public checkedNodes: string[] = ['2','6'];
+  selectedGroupName = 'All';
   public nodeChecked(args): void{
     // alert("The checked node's id is: "+this.tree.checkedNodes);
 
@@ -190,5 +198,30 @@ export class FilterPanelComponent implements OnInit {
       const litterItemSelected = this.litterTypes.checkedNodes.find(a => parseInt(a, 10) == litterItem.id);
       litterItem.isChecked = litterItemSelected ? true : false;
     });
+  }
+
+  groupSelected($event: ChangeEventArgs) {
+
+    // console.log(this.dashBoardData.groups);
+    // console.log(this.dashBoardData.groupIds);
+    // console.log($event);
+
+    if ($event.value == 'All') {
+      this.dashBoardData.selectedGroup = -1;
+    }
+
+    let index = 0;
+    this.dashBoardData.groups.forEach((groupName) => {
+      // console.log(`${groupName} == ${$event.value}`);
+      if (groupName == $event.value) {
+        // console.log(true);
+        // alert('setting to' + this.dashBoardData.groupIds[index] );
+        this.dashBoardData.selectedGroup = this.dashBoardData.groupIds[index];
+
+      }
+      index++;
+    });
+
+    this.groupBeenSelected.emit(this.dashBoardData.selectedGroup);
   }
 }

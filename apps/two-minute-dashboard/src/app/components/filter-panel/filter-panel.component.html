@@ -44,6 +44,19 @@
           <div id='treeparent'><ejs-treeview #litterTypes id='treeelement' [fields]='field' [showCheckBox]='showCheckBox' (nodeChecked)='litterTypesChanged($event)'></ejs-treeview></div>
         </ng-template>
       </e-accordionitem>
+
+      <e-accordionitem>
+        <ng-template #header>
+          <div>Group</div>
+        </ng-template>
+        <ng-template #content>
+          <ejs-dropdownlist [dataSource]='_dashBoardData.groups' [(value)]='selectedGroupName' [allowFiltering]='true' [ignoreAccent]='true' (change)='groupSelected($event)' placeholder='Select a value'
+                            filterBarPlaceholder='e.g: Cornwall'>
+          </ejs-dropdownlist>
+        </ng-template>
+      </e-accordionitem>
+
+
       <e-accordionitem>
         <ng-template #header>
           <div>Location</div>
@@ -54,6 +67,7 @@
           </ejs-dropdownlist>
         </ng-template>
       </e-accordionitem>
+
     </e-accordionitems>
   </ejs-accordion>
   <ng-content></ng-content>

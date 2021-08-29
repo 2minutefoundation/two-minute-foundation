@@ -19,4 +19,7 @@ export class DashBoardData {
   bounds: LatLngBounds;
   noLocationCheckinCount: number;
   withLocationCheckinCount: number;
+  groups: string[] = [];
+  groupIds: number[] = [];
+  selectedGroup = -1;
 }

@@ -92,4 +92,9 @@ export class AppComponent implements AfterViewInit {
 
     this.filterUpdates();
   }
+
+  groupSelected(groupId: number) {
+    // alert(groupId);
+    this.filterUpdates();
+  }
 }
