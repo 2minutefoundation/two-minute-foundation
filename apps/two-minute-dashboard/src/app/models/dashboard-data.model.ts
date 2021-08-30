@@ -22,4 +22,6 @@ export class DashBoardData {
   groups: string[] = [];
   groupIds: number[] = [];
   selectedGroup = -1;
+  users: string[] = [];
+  userIds: string[] = [];
 }

@@ -85,6 +85,18 @@
 
         <e-accordionitem expanded='true'>
           <ng-template #header>
+            <div>Users</div>
+          </ng-template>
+          <ng-template #content>
+            <div *ngFor='let user of users'>
+              {{user}}
+            </div>
+            <div style='display: none; visibility: hidden'>*{{users | json}}*</div>
+          </ng-template>
+        </e-accordionitem>
+
+        <e-accordionitem expanded='true'>
+          <ng-template #header>
             <div>Location Provided</div>
           </ng-template>
           <ng-template #content>

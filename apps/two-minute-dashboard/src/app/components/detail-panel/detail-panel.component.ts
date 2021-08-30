@@ -35,6 +35,7 @@ export class DetailPanelComponent implements OnInit {
 
   _dashBoardData: DashBoardData;
   private dbd: DashBoardData;
+  users: string[];
   get dashBoardData(): DashBoardData {
     return this._dashBoardData;
   }
@@ -43,7 +44,9 @@ export class DetailPanelComponent implements OnInit {
     // alert('dashBoardData: ' + JSON.stringify(value));
     if (value) {
 
+      console.log('dashdata', value);
      this.single = value.litterSummaryChartData;
+     this.users = value.users;
 
       this.dbd = value;
 
