@@ -3,7 +3,7 @@
   width: 100%;
   display: grid;
   grid-template-columns: max-content auto min-content;
-  grid-template-rows: max-content auto;
+  grid-template-rows: 50px auto;
 }
 
 two-minute-foundation-filter-panel {
@@ -16,6 +16,13 @@ two-minute-foundation-filter-panel {
 .update-map-button {
   width: calc(100% - 20px);
   margin: 10px;
+}
+
+.test {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
 }
 
 two-minute-foundation-map {
